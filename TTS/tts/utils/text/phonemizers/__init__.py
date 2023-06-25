@@ -13,6 +13,26 @@ _ = [ESpeak.name()] * len(ESPEAK_LANGS)
 DEF_LANG_TO_PHONEMIZER = dict(list(zip(list(ESPEAK_LANGS), _)))
 
 # Force default for some languages
+DEF_LANG_TO_PHONEMIZER ={'cs-cz': 'gruut',
+ 'lb': 'gruut',
+ 'ar': 'gruut',
+ 'fa': 'gruut',
+ 'fr-fr': 'gruut',
+ 'sv-se': 'gruut',
+ 'it-it': 'gruut',
+ 'sw': 'gruut',
+ 'en-gb': 'gruut',
+ 'nl': 'gruut',
+ 'pt': 'gruut',
+ 'es-es': 'gruut',
+ 'ru-ru': 'gruut',
+ 'en-us': 'gruut',
+ 'zh-cn': 'zh_cn_phonemizer',
+ 'de-de': 'gruut',
+ 'en': 'gruut',
+ 'ja-jp': 'ja_jp_phonemizer',
+ 'ko-kr': 'ko_kr_phonemizer',
+ 'bn': 'bn_phonemizer'}
 DEF_LANG_TO_PHONEMIZER["en"] = DEF_LANG_TO_PHONEMIZER["en-us"]
 
 

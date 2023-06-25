@@ -9,6 +9,26 @@ from librosa import pyin
 # For using kwargs
 # pylint: disable=unused-argument
 
+def compute_energy(y: np.ndarray, **kwargs) -> np.ndarray:
+    """Compute energy of a waveform using the same parameters used for computing melspectrogram.
+    Args:
+      x (np.ndarray): Waveform. Shape :math:`[T_wav,]`
+    Returns:
+      np.ndarray: energy. Shape :math:`[T_energy,]`. :math:`T_energy == T_wav / hop_length`
+    Examples:
+      >>> WAV_FILE = filename = librosa.example('vibeace')
+      >>> from TTS.config import BaseAudioConfig
+      >>> from TTS.utils.audio import AudioProcessor
+      >>> conf = BaseAudioConfig()
+      >>> ap = AudioProcessor(**conf)
+      >>> wav = ap.load_wav(WAV_FILE, sr=ap.sample_rate)[:5 * ap.sample_rate]
+      >>> energy = ap.compute_energy(wav)
+    """
+    x = stft(y=y, **kwargs)
+    mag, _ = magphase(x)
+    energy = np.sqrt(np.sum(mag**2, axis=0))
+    return energy
+
 
 def build_mel_basis(
     *,

@@ -47,7 +47,7 @@ VCTK_DOWNLOAD_PATH='./datasets/vctk'
 
 # init configs
 vctk_config = BaseDatasetConfig(
-    formatter="vctk_old", dataset_name="vctk", meta_file_train="", meta_file_val="", path=VCTK_DOWNLOAD_PATH, language="ur"
+    formatter="vctk", dataset_name="vctk", meta_file_train="", meta_file_val="", path=VCTK_DOWNLOAD_PATH, language="ur"
 )
 
 # Add here all datasets configs, in our case we just want to train with the VCTK dataset then we need to add just VCTK. Note: If you want to added new datasets just added they here and it will automatically compute the speaker embeddings (d-vectors) for this new dataset :)
