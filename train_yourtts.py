@@ -22,13 +22,13 @@ torch.set_num_threads(24)
 CURRENT_PATH = os.path.dirname(os.path.abspath(__file__))
 
 # Name of the run for the Trainer
-RUN_NAME = "YourTTS-UR-VCTK"
+RUN_NAME = "YourTTS-MODI"
 
 # Path where you want to save the models outputs (configs, checkpoints and tensorboard logs)
-OUT_PATH = os.path.dirname(os.path.abspath(__file__))  # "/raid/coqui/Checkpoints/original-YourTTS/"
+OUT_PATH = "/content/drive/MyDrive/Man ki baat/YourTTS-MODI/"
 
 # If you want to do transfer learning and speedup your training you can set here the path to the original YourTTS model
-RESTORE_PATH = None  # "/root/.local/share/tts/tts_models--multilingual--multi-dataset--your_tts/model_file.pth"
+RESTORE_PATH = "/content/yourtts_recipe_new/tts_models--multilingual--multi-dataset--your_tts/model_file.pth.tar"  # "/root/.local/share/tts/tts_models--multilingual--multi-dataset--your_tts/model_file.pth"
 
 # This paramter is usefull to debug, it skips the training epochs and just do the evaluation  and produce the test sentences
 SKIP_TRAIN_EPOCH = False
@@ -43,11 +43,11 @@ SAMPLE_RATE = 16000
 MAX_AUDIO_LEN_IN_SECONDS = 10
 
 #path of vctk 
-VCTK_DOWNLOAD_PATH='./datasets/vctk'
+VCTK_DOWNLOAD_PATH='/content/drive/MyDrive/Man ki baat/Colab/dataset'
 
 # init configs
 vctk_config = BaseDatasetConfig(
-    formatter="vctk", dataset_name="vctk", meta_file_train="", meta_file_val="", path=VCTK_DOWNLOAD_PATH, language="ur"
+    formatter="vctk", dataset_name="vctk", meta_file_train="", meta_file_val="", path=VCTK_DOWNLOAD_PATH, language="hi"
 )
 
 # Add here all datasets configs, in our case we just want to train with the VCTK dataset then we need to add just VCTK. Note: If you want to added new datasets just added they here and it will automatically compute the speaker embeddings (d-vectors) for this new dataset :)
@@ -117,7 +117,7 @@ config = VitsConfig(
     run_name=RUN_NAME,
     project_name="YourTTS",
     run_description="""
-            - Original YourTTS trained using Urdu dataset
+            - Original YourTTS trained using Modi hindi dataset
         """,
     dashboard_logger="tensorboard",
     logger_uri=None,
@@ -137,18 +137,18 @@ config = VitsConfig(
     print_eval=False,
     use_phonemes=False,
     phonemizer="espeak",
-    phoneme_language="ur",
+    phoneme_language="hi",
     compute_input_seq_cache=True,
     add_blank=True,
-    text_cleaner="urdu_cleaners",
+    text_cleaner="hindi_cleaners",
     characters=CharactersConfig(
         characters_class="TTS.tts.models.vits.VitsCharacters",
         pad="_",
         eos="&",
         bos="*",
         blank=None,
-        characters="akəː.ɟbxtrhmɛpẽuʌʂsiloʋndɪfjqʃcɡʰʊwʈzɔɖʐɣðŋʒɹœɒθɐʔ",
-        punctuations=". ",
+        characters=" !#&'(),-./0123456789:;?| ँंःअआइईउऊऋऍएऐऑओऔकखगघङचछजझञटठडढणतथदधनपफबभमयरलवशषसह़ािीुूृॅेैॉोौ्ॐक़ख़ग़ज़ड़ढ़फ़।॥०१२३४–",
+        punctuations=".!:;? ",
         phonemes="",
         is_unique=True,
         is_sorted=True,
@@ -162,34 +162,16 @@ config = VitsConfig(
     mixed_precision=False,
     test_sentences=[
         [
-            "ɪs rəpoːrʈ mẽ kʌhaː ɡajaː hɛ keːh askaː eːk ɡʌrda nɪkaːl diːaː ɡajaː hɛ.",
-            "VCTK_old_i190717@nu.edu.pk",
+            "नमस्कार, मेरा नाम नरेंद्र मोदी है",
+            "p0",
             None,
-            "ur",
+            "hi",
         ],
         [
-            "anʈrʌ neːʈ bʌnd mʊsalsal kərfeːoː foːɟi taːqət seː aʋaːm koː ɡoːlioːn seː cʰʌlniː kjaː ɟaː rʌhaː hɛ.",
-            "VCTK_old_i190614@nu.edu.pk",
+            "मैं भारत का 14वाँ प्रधान मंत्री हूँ",
+            "p0",
             None,
-            "ur",
-        ],
-        [
-            "kəraːci mẽ kʌi bərsoːn baːd dɛhʃat ɡʌrdi keː ʋaːqaːt mẽ kʌmi ʋaːqeː huːi ɔr amən bəhaːl haʋaː.",
-            "VCTK_old_i190621@nu.edu.pk",
-            None,
-            "ur",
-        ],
-        [
-            "sʌb kʊcʰ kʰʌp ɟaːtaːheː ɪs mẽ kaːraːʃəq hɛ diːʋaːnoːn kaːkaː miːm.",
-            "VCTK_old_i190632@nu.edu.pk",
-            None,
-            "ur",
-        ],
-        [
-            "ɟɪseː woː naːtoː nʌɡəl paːrheː hẽ oːrəna hiː ʊɡəl paːrheː hẽ.",
-            "VCTK_old_i191976@nu.edu.pk",
-            None,
-            "ur",
+            "hi",
         ],
     ],
     # Enable the weighted sampler
