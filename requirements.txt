@@ -2,3 +2,4 @@ anyascii
 trainer
 unidecode
 phonemizer
+librosa==0.8.0
