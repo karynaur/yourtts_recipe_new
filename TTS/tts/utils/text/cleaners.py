@@ -154,7 +154,7 @@ def collapse_whitespace(text):
     return re.sub(_whitespace_re, " ", text).strip()
 
 
-def urdu_cleaners(text):
+def hindi_cleaners(text):
 
   # phonemes = phonemize(text, language='ur', backend='espeak', strip=True, language_switch='remove-flags')
   phonemes = collapse_whitespace(text)
